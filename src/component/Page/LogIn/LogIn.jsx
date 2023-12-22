@@ -50,12 +50,13 @@ const LogIn = () => {
                 const userInfo = {
                     displayName: result.user.displayName,
                     email: result.user.email,
+                    photoURL: result.user.photoURL,
                     role: 'employee'
                 }
                 //go to home
                 axiosApi.post('/users', userInfo)
                     .then(res => console.log(res.data))
-                navigate('/')
+                navigate('/dashboard')
             })
             .catch(error => {
                 notify2()
