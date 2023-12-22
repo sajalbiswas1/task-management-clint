@@ -4,12 +4,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import useAxios from "../../../Hooks/useAxios";
 
 
 const SignUp = () => {
     const { userSignIn, userProfileUpdate } = useContext(AuthContext);
     const [registerError, setRegisterError] = useState('')
     const navigate = useNavigate()
+    const axiosApi = useAxios()
     const handleSignIn = event => {
         event.preventDefault();
         const form = event.target;
@@ -19,6 +21,12 @@ const SignUp = () => {
         const password = form.password.value;
         console.log(name, link, email, password)
         const obj = { displayName: name, photoURL: link }
+        const userInfo = {
+            displayName: name,
+            email: email,
+            role: 'employee',
+            photoURL: link,
+        }
 
         //user update
         const userUpdate = () => {
@@ -64,6 +72,10 @@ const SignUp = () => {
                 notify()
                 console.log(user)
                 userUpdate()
+                
+                //go to home
+                axiosApi.post('/users', userInfo)
+                    .then(res => console.log(res.data))
                 navigate('/')
             })
             .catch(error => {

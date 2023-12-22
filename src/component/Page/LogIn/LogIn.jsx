@@ -5,12 +5,14 @@ import { AuthContext } from "../../../AuthProvider/AuthProvider";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useAxios from "../../../Hooks/useAxios";
 
 
 const LogIn = () => {
     const { userLogin, googleLogin } = useContext(AuthContext);
     const [logInError, setLogInError] = useState('');
     const navigate = useNavigate();
+    const axiosApi = useAxios()
 
     const handleLogin = event => {
         event.preventDefault();
@@ -42,9 +44,17 @@ const LogIn = () => {
     //google logIn
     const handleGoogleLogIn = () => {
         googleLogin()
-            .then(user => {
+            .then(result => {
                 notify()
-                console.log(user)
+                console.log(result)
+                const userInfo = {
+                    displayName: result.user.displayName,
+                    email: result.user.email,
+                    role: 'employee'
+                }
+                //go to home
+                axiosApi.post('/users', userInfo)
+                    .then(res => console.log(res.data))
                 navigate('/')
             })
             .catch(error => {
