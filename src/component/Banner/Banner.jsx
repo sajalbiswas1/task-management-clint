@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 const Banner = () => {
     return (
         <div>
-            <div className='lg:w-[1280px] md:w-10/12 m-auto'>
+            <div className='max-w-7xl m-auto'>
             <Swiper
                 slidesPerView={1}
                 spaceBetween={30}
