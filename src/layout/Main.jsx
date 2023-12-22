@@ -1,8 +1,11 @@
+import Footer from "../component/Shared/Footer/Footer";
+import Navbar from "../component/Shared/Navbar/Navbar";
 
 const Main = () => {
     return (
         <div>
-            <div>Hello world! </div>
+            <Navbar></Navbar>
+            <Footer></Footer>
         </div>
     );
 };
