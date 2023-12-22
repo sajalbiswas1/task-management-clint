@@ -9,7 +9,9 @@ const DashHome = () => {
             <div>
                 <p>Ongoing</p>
             </div>
-            
+            <div>
+                <p>complete</p>
+            </div>
         </div>
     );
 };
